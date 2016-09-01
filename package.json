@@ -1,0 +1,20 @@
+{
+  "name": "foodDelivery",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start"
+  },
+  "dependencies": {
+    "react": "15.2.1",
+    "react-native": "0.30.0",
+    "react-native-action-button": "^1.1.11",
+    "react-native-drawer-layout": "^1.0.0",
+    "react-native-gifted-spinner": "^0.1.0",
+    "react-native-material-design": "^0.3.7",
+    "react-native-router-flux": "^3.35.0",
+    "react-native-scrollable-tab-view": "^0.5.3",
+    "react-native-vector-icons": "^2.0.3",
+    "underscore": "^1.8.3"
+  }
+}
