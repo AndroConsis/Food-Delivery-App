@@ -26,6 +26,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import GiftedSpinner from 'react-native-gifted-spinner';
 
 var REQUEST_URL = 'http://www.mocky.io/v2/57a30ea93b0000b10f903406';
+var _addToCart;
 
 class HotDeals extends Component {
   constructor(props) {
@@ -38,6 +39,7 @@ class HotDeals extends Component {
       };
         this.renderEntity = this.renderEntity.bind(this);
         this.renderLoadingView = this.renderLoadingView.bind(this);
+        _addToCart = this.props.addToCart;
   }
 
   componentDidMount(){
@@ -81,7 +83,7 @@ class HotDeals extends Component {
       sectionID: number, 
       rowID: number, ) {
       return(
-        <DishItem entity = { entity } />
+        <DishItem entity = { entity } addToCart = {_addToCart }/>
       );
     }
 
@@ -146,6 +148,7 @@ class DishItem extends Component {
    this.setState({
       quantity : this.state.quantity + 1,
    })
+   this.props.addToCart(entity);
   }
 
   removeDish(entity) {

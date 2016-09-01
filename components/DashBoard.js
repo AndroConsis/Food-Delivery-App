@@ -16,45 +16,19 @@ import navigation from '../helpers/navigation'
 import App from './App'
 import PastOrders from './PastOrders'
 import Notifications from './Notifications'
-
-// Hardware backPress
-  BackAndroid.addEventListener('hardwareBackPress()', () => {
-    if(_navigator && _navigator.getCurrentRoutes().length > 1){
-     _navigator.pop();
-     return true;
-    }
-    return false;
-  });
+import Menu from './Menu'
+import {Scene, Router} from 'react-native-router-flux';
 
 class DashBoard extends Component {
 
-  renderScene(route, navigator) {
-
-  	if( route.name == 'App' ) {
-  		return <App navigator = { navigator } />
-   	}
-
-   	if( route.name == 'PastOrders' ) {
-   		return <PastOrders navigator = { navigator } />
-   	}
-
-    if( route.name == 'Notifications' ) {
-      return <Notifications navigator = { navigator } />
-    }
-  }
-
   render() {
-    return (
-      <Navigator
-      	style={{flex : 1}}
-        ref={(ref) => this._navigator = ref}
-      	initialRoute = {{
-      		name : "App",
-      	}}
-      	renderScene = {this.renderScene}
-        configureScene={(route, routeStack) => Navigator.SceneConfigs.FloatFromBottom}
-         />
-    );
+    return <Router>
+      <Scene key="root">
+        <Scene key="app" component={App} hideNavBar={true}/>
+        <Scene key="notifications" component={Notifications} title="Notifications"/>
+        <Scene key="past_orders" component={PastOrders} title="Past Orders"/>
+      </Scene>
+    </Router>
   }
 }
 

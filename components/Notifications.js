@@ -9,15 +9,30 @@ import {
 		} from 'react-native';
 
 import styles from '../styles/menu';
+import { Toolbar } from 'react-native-material-design';
+
+import { EventEmitter } from 'fbemitter';
+
+let _emitter = new EventEmitter();
 
 // A particular View Component
 class Notifications extends Component {
+
+	constructor(props) {
+	  super(props);
+	
+	  this.state = {};
+	}
 
 // rendering Veiw
 	render() {
 		return (
 			<View style={{flex: 1}}>
-				<Text style={{fontSize : 30}}>Notifications</Text>
+				<Toolbar 
+			 	  			title = "Notifications"
+			 	  			icon = "back"
+			 	  			onIconPress ={() => {_emitter.emit('back')}}
+			 	  		/>
 			</View>
 		);
 	}

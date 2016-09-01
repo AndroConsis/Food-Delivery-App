@@ -42,7 +42,7 @@ class Menu extends Component {
 	componentDidMount() {
 		this.setState({
 			dataSource : this.state.dataSource.cloneWithRows(
-				['Order', 'Notifications', 'Past Orders', 'Invite', 'Help']
+				[{'name':'Order', 'key':'app'}, {'name':'Notifications', 'key':'notifications'}, {'name':'Past Orders', 'key':'past_orders'}, {'name':'Invite', 'key':'app'}, {'name':'Help', 'key':'app'}]
 				)	
 		});
 	}
@@ -50,13 +50,13 @@ class Menu extends Component {
 	_renderMenuItem(item) {
 		return(
 			<TouchableOpacity onPress={()=> this._onItemSelect(item)}>
-				<Text style={styles.menuItem}><Icon name="ios-alert-outline" size={25}/> {item}</Text>
+				<Text style={styles.menuItem}><Icon name="ios-alert-outline" size={25}/> {item.name}</Text>
 				</TouchableOpacity>
 			);
 	}
 
 	_onItemSelect (item) {
-		_navigate(item)
+		_navigate(item.key);
 	}
 
 // rendering View
