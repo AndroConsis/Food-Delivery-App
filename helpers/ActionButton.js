@@ -142,7 +142,7 @@ export default class ActionButton extends Component {
   _renderButtonIcon() {
     const { icon, btnOutRangeTxt, buttonTextColor } = this.props;
 
-    if (icon) return icon;
+    // if (icon) return icon;
 
     const buttonTextColorMax = btnOutRangeTxt ? btnOutRangeTxt : buttonTextColor;
 
@@ -171,7 +171,9 @@ export default class ActionButton extends Component {
         <View
           style={this.getActionsStyle()}
           pointerEvents={'box-none'}
-        />
+        >
+        <Text style={{color: "#FFFFFF", fontSize: 16}}>Checkout</Text>
+        </View>
     );
   }
 
@@ -244,7 +246,7 @@ ActionButton.defaultProps = {
   autoInactive: true,
   onPress: () => {},
   backdrop: false,
-  degrees: 1,
+  degrees: 0,
   position: 'right',
   offsetX: 30,
   offsetY: 30,

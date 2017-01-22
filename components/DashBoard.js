@@ -17,6 +17,7 @@ import App from './App'
 import PastOrders from './PastOrders'
 import Notifications from './Notifications'
 import Menu from './Menu'
+import ReviewOrder from './ReviewOrder'
 import {Scene, Router} from 'react-native-router-flux';
 
 class DashBoard extends Component {
@@ -27,6 +28,7 @@ class DashBoard extends Component {
         <Scene key="app" component={App} hideNavBar={true}/>
         <Scene key="notifications" component={Notifications} title="Notifications"/>
         <Scene key="past_orders" component={PastOrders} title="Past Orders"/>
+        <Scene key="review_order" component={ReviewOrder} title="Review Order"/>
       </Scene>
     </Router>
   }

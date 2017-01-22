@@ -25,6 +25,8 @@ import styles from '../styles/root';
 import ActionButton from '../helpers/ActionButton';
 import { Actions } from 'react-native-router-flux';
 
+import _ from 'underscore';
+
 const menuIcon =  (<Icon name="add-cicle-outline" size={30} color="#4F8EF7" />)
 
 import { EventEmitter } from 'fbemitter';
@@ -75,13 +77,10 @@ class App extends Component {
 						</ScrollableTabView>
 						<ActionButton buttonColor="rgba(222,51,69,1)" hideShadow={false}>
 				          <ActionButton.Item buttonColor='#9b59b6' title="New Task" onPress={() => console.log("New Task")}>
-				            <Icon name="add-cicle-outline" style={styles.actionButtonIcon} />
+				            <Icon name="add-circle-outline" style={styles.actionButtonIcon} />
 				          </ActionButton.Item>
 				          <ActionButton.Item buttonColor='#3498db' title="Notifications" onPress={() => {}}>
-				            <Icon name="add-cicle-outline" style={styles.actionButtonIcon} />
-				          </ActionButton.Item>
-				          <ActionButton.Item buttonColor='#1abc9c' title="All Tasks" onPress={() => {}}>
-				            <Icon name="add-cicle-outline" style={styles.actionButtonIcon} />
+				            <Icon name="add-circle-outline" style={styles.actionButtonIcon} />
 				          </ActionButton.Item>
 				        </ActionButton>
 					</View>
@@ -90,9 +89,7 @@ class App extends Component {
 		}
 
 		_addItemToCart(x) {
-				order.push(x);
-				alert(order.length);
-			}
+				}
 
 		_navigateTo(route){
 			switch(route) {
