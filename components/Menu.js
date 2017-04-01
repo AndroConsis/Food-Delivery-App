@@ -27,17 +27,17 @@ const drawerMenuListItem = [
 	}, 
 	{
 		'name':'TRACK ORDER', 
-		'key':'track_orders', //New Component
-		'icon': 'sios-paw-outline'
+		'key':'track_order', //New Component
+		'icon': 'ios-paw-outline'
 	}, 
 	{
 		'name':'PAST ORDERS', 
-		'key':'app',
+		'key':'past_order',
 		'icon': 'ios-filing-outline'
 	}, 
 	{
 		'name':'NOTIFICATIONS',
-		'key':'app',
+		'key':'notifications',
 		'icon':'ios-color-wand-outline'
 	}, 
 	{
@@ -74,7 +74,7 @@ class Menu extends Component {
 	_renderMenuItem(item) {
 		return(
 			<View style={styles.drawer_list_item}>
-				<TouchableOpacity onPress={()=> this._onItemSelect(item)}>
+				<TouchableOpacity onPress={()=> this.onItemSelect(item)}>
 					<View style={styles.item_container}>
 						<View style={styles.item_icon}><Icon style={styles.icon} name={item.icon} size={36}></Icon></View>
 						<View style={styles.item_title}><Text style={styles.title_text}> {item.name} </Text></View>
@@ -84,7 +84,7 @@ class Menu extends Component {
 			);
 	}
 
-	_onItemSelect (item) {
+	onItemSelect (item) {
 		_navigate(item.key);
 	}
 

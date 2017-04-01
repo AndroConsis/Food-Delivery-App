@@ -22,6 +22,8 @@ var Mock = [{
 
 import { Card, Button , Divider, Ripple } from 'react-native-material-design';
 
+import styles from '../styles/hotdeals'
+
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import GiftedSpinner from 'react-native-gifted-spinner';
@@ -110,10 +112,6 @@ class HotDeals extends Component {
             <Text>
                 Loading
             </Text>
-             <TouchableHighlight style={{padding: 12,}} 
-                onPress={() => this.populateData()} underlayColor="white">
-              <Icon name="ios-remove-circle-outline" size={50} color="#616161" />
-             </TouchableHighlight>
         </View>
       )
     }
@@ -122,6 +120,10 @@ class HotDeals extends Component {
       this.fetchData();
     }
 }
+
+/////////////////////
+// CLASS DISH ITEM //
+/////////////////////
 
 class DishItem extends Component {
   constructor(props) {
@@ -135,30 +137,39 @@ class DishItem extends Component {
   render(){
     const { entity } = this.props;
     return ( 
-          <View>
-            <Card>
-                  <Card.Body style={{height : 12}}>
-                        <Text style={{fontWeight: '300', fontSize: 24}}>{entity.dish_name}</Text>
-                  </Card.Body>
-                  <Card.Actions style={{height : 15}}>
-                      <View style={{flex: 1, flexDirection: 'row'}}>
-                            <View style={{flex:1, justifyContent: 'center', alignItems: 'flex-start'}}>
-                               <Text style={styles.dish_price}>${entity.dish_price}</Text>
-                            </View>
-                            <View style={{flex:1, justifyContent: 'flex-end', alignItems: 'center', 
-                            flexDirection:'row'}}>
-                                <TouchableHighlight style={{padding: 12,}} 
-                                    onPress={() => this.removeDish(entity)} underlayColor="white">
-                                <Icon name="ios-remove-circle-outline" size={35} color="#616161" />
-                                </TouchableHighlight>
-                                <Text style={{fontSize : 15}}>{this.state.quantity}</Text>
-                              <TouchableHighlight style={{padding: 12,}} onPress={() => this.addDish(entity)} underlayColor="white">
-                              <Icon name="ios-add-circle-outline" size={35} color="#616161" />
-                              </TouchableHighlight>
-                            </View>
-                      </View>
-                  </Card.Actions>
-            </Card>
+          <View style={styles.item}>
+              <View style={styles.item_top_info}>
+                <Text style={styles.classic}>
+                  CLASSIC
+                </Text>
+              </View>
+              <View style={styles.item_middle_info}>
+                <Text style={styles.dish_name}>{entity.dish_name}</Text>          
+                <Text style={styles.dish_price}><Text style={styles.currency}>₹</Text>{entity.dish_price}</Text>
+              </View>
+              <View style={styles.item_bottom_info}>
+                <View style={styles.details_container}>
+                  <Text style={styles.details}>Rice, Extra Chicken, Extra Paneer, Extra Cheese</Text>
+                </View>
+                <View style={styles.counter_container}>
+                  <View style={styles.counter}>
+                  { this.state.quantity > 0 && 
+                    <Text style={styles.counter_text}>{this.state.quantity}</Text>
+                  }
+                  </View>
+                  <View style={styles.buttons}>
+                  {this.state.quantity > 0 && 
+                      <TouchableHighlight style={{paddingLeft: 8}} 
+                            onPress={() => this.removeDish(entity)} underlayColor="white">
+                        <Icon name="ios-remove-circle-outline" size={45} color="#26a69a" />
+                        </TouchableHighlight>
+                      }
+                      <TouchableHighlight style={{paddingLeft: 12}} onPress={() => this.addDish(entity)} underlayColor="white">
+                      <Icon name="ios-add-circle-outline" size={45} color="#26a69a" />
+                      </TouchableHighlight>
+                  </View>
+                </View>
+              </View>
         </View>
       );
   }
@@ -176,47 +187,6 @@ class DishItem extends Component {
     })
   }
 }
-
-
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: '#f3e5f5',
-},
-  title: {
-    fontSize: 20,
-    backgroundColor: 'transparent'
-  },
-  button: {
-    marginRight: 10
-  },
-  separator: {
-       height: 1,
-       backgroundColor: '#212121'
-   },
-   listView: {
-       paddingTop: 1,
-       backgroundColor: '#F2F1F0',
-       paddingBottom: 1
-   },
-   loading: {
-       flex: 1,
-       alignItems: 'center',
-       justifyContent: 'center',
-       flexDirection: 'column'
-   },
-   dish_price:{
-       left: 16,
-       fontSize: 18
-   },
-
-   ripple: {
-      paddingHorizontal: 8,
-   }
-
-});
 
 
 export default HotDeals;

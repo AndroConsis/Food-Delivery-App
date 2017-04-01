@@ -37,7 +37,7 @@ module.exports = StyleSheet.create({
 
     title_text: {
         fontSize: 20,
-        fontFamily: 'Cochin',
+        fontFamily: 'Verdana',
         color: '#616161'
     },
 
@@ -60,7 +60,7 @@ module.exports = StyleSheet.create({
     },
 
     button_text: {
-        fontFamily: 'Cochin',
+        fontFamily: 'Verdana',
         fontSize: 20,
         alignSelf: 'center',
         color: '#3e3e3e'

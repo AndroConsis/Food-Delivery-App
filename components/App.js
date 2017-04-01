@@ -63,6 +63,7 @@ class App extends Component {
 			 	  		<Toolbar 
 			 	  			title = "Home"
 			 	  			icon = "menu"
+			 	  			theme = "light" 
 			 	  			onIconPress ={() => {_emitter.emit('openMenu')}}
 			 	  		/>
 				      	<ScrollableTabView
