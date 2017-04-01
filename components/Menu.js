@@ -13,13 +13,39 @@ import styles from '../styles/menu';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 
-var MOCK = [
-	{"title": "Home", "icon" : "Home"},
-	{"title": "Past Orders", "icon" : "PastOrders"},
-	{"title": "Notifications", "icon" : "Notifications"},
-	{"title": "Invite", "icon" : "Invite"},
-	{"title": "Help", "icon" : "help"},
-]
+const drawerMenuListItem = [
+	{
+		'name':'HOME', 
+		'key':'app',
+		'icon': 'ios-home-outline'
+	}, 
+	{
+		'name':'PROFILE',
+		'key':'profile',	//New Component
+		'icon': 'ios-person-outline'
+
+	}, 
+	{
+		'name':'TRACK ORDER', 
+		'key':'track_orders', //New Component
+		'icon': 'sios-paw-outline'
+	}, 
+	{
+		'name':'PAST ORDERS', 
+		'key':'app',
+		'icon': 'ios-filing-outline'
+	}, 
+	{
+		'name':'NOTIFICATIONS',
+		'key':'app',
+		'icon':'ios-color-wand-outline'
+	}, 
+	{
+		'name': 'CONTACT US',
+		'key': 'contactus',
+		'icon':'ios-heart-outline'
+	}
+	]
 
 var _navigate;
 
@@ -41,17 +67,20 @@ class Menu extends Component {
 	// Component LifeCycle
 	componentDidMount() {
 		this.setState({
-			dataSource : this.state.dataSource.cloneWithRows(
-				[{'name':'Order', 'key':'app'}, {'name':'Notifications', 'key':'notifications'}, {'name':'Past Orders', 'key':'past_orders'}, {'name':'Invite', 'key':'app'}, {'name':'Help', 'key':'app'}]
-				)	
+			dataSource : this.state.dataSource.cloneWithRows(drawerMenuListItem)	
 		});
 	}
 
 	_renderMenuItem(item) {
 		return(
-			<TouchableOpacity onPress={()=> this._onItemSelect(item)}>
-				<Text style={styles.menuItem}><Icon name="ios-alert-outline" size={25}/> {item.name}</Text>
+			<View style={styles.drawer_list_item}>
+				<TouchableOpacity onPress={()=> this._onItemSelect(item)}>
+					<View style={styles.item_container}>
+						<View style={styles.item_icon}><Icon style={styles.icon} name={item.icon} size={36}></Icon></View>
+						<View style={styles.item_title}><Text style={styles.title_text}> {item.name} </Text></View>
+					</View>
 				</TouchableOpacity>
+			</View>
 			);
 	}
 
@@ -63,7 +92,28 @@ class Menu extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-			<View style={styles.profileView}>
+				<ListView
+					dataSource={this.state.dataSource}
+					renderRow={ (item) => this._renderMenuItem(item) }
+				></ListView>
+				<View style={styles.footer_container}>
+					<TouchableOpacity style={styles.button}>
+					<View style={styles.item_container}>
+						<View style={styles.item_title}><Text style={styles.button_text}> CHECK NEW OFFERS </Text></View>
+					</View>
+				</TouchableOpacity>
+				</View>
+			</View>
+		);
+	}
+
+}
+
+module.exports = Menu;
+
+
+/*
+<View style={styles.profileView}>
 				<Text style={styles.profileName}>Sign In</Text>
 			</View>
 			<View style={styles.meunList}>
@@ -72,10 +122,4 @@ class Menu extends Component {
 					renderRow={(item) => this._renderMenuItem(item)}
 				/>
 			</View>
-			</View>
-		);
-	}
-
-}
-
-module.exports = Menu;
+			*/

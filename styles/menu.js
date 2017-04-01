@@ -2,34 +2,67 @@ import { StyleSheet } from 'react-native';
 
 module.exports = StyleSheet.create({
     container: {
-        backgroundColor: '#FFF',
-        top: 20,
         flex: 1,
         flexDirection: 'column',
-    },
-    
-    profileView: {
-    	flex: 1,
-    	backgroundColor: "#FFFFFF",
-    	justifyContent: 'center',
-    	alignItems: 'center'
-    },	
-    meunList: {
-    	flex: 3,
-    	backgroundColor: "#F2F1F0"
+        justifyContent: 'space-around',
+        top: 30
     },
 
-    menuItem: {
-    	marginLeft : 20,
-    	marginTop: 20,
-    	fontSize: 16,
-        color: '#424242',
-        padding: 10,
-        textAlign: 'left'
+
+
+    drawer_list_item: {
     },
 
-    profileName: {
-    	fontSize: 20,
-    	color: '#424242' 
+    item_container: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        height: 64
+    },
+
+    item_icon: {
+        flex: 1,
+        paddingLeft: 50
+    },
+
+    item_title: {
+        flex: 7,
+        paddingLeft: 6
+    },
+
+    icon: {
+        color: '#616161'
+    },
+
+    title_text: {
+        fontSize: 20,
+        fontFamily: 'Cochin',
+        color: '#616161'
+    },
+
+    footer_container: {
+        flex: .6,
+        top: 10
+    },
+
+    button: {
+        borderWidth: 2,
+        borderColor: '#e5e5e5',
+        borderRadius: 5,
+        height: 54,
+        marginLeft: 30,
+        marginRight: 30,
+        marginTop: 5,
+        marginBottom: 5,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+
+    button_text: {
+        fontFamily: 'Cochin',
+        fontSize: 20,
+        alignSelf: 'center',
+        color: '#3e3e3e'
     }
 });

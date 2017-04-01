@@ -8,7 +8,8 @@ import {
   Text,
   Image,
   ListView, 
-  TouchableHighlight
+  TouchableHighlight,
+  AsyncStorage
 } from 'react-native';
 
 
@@ -44,23 +45,38 @@ class HotDeals extends Component {
 
   componentDidMount(){
     this.fetchData(); 
-
-    var entities = Mock;
-    this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(entities)
-    });
   }
 
   fetchData() {
-    fetch(REQUEST_URL)
-      .then((response) => response.json())
-      .then((responseData) => {
-        this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(responseData),
-          isLoading: false,
-        });
-      })
-      .done();
+    let value = null;
+    try {
+      AsyncStorage.getItem("@MYSUPERSTORE", (err, result) => {
+        if(result) {
+          this.setState({
+              dataSource: this.state.dataSource.cloneWithRows(JSON.parse(result)),
+              isLoading: false,
+            });
+
+        } else {
+          fetch(REQUEST_URL)
+          .then((response) => response.json())
+          .then((responseData) => {
+            try {
+              AsyncStorage.setItem("@MYSUPERSTORE", JSON.stringify(responseData));
+            } catch (err) {
+              // 
+            }
+            this.setState({
+              dataSource: this.state.dataSource.cloneWithRows(responseData),
+              isLoading: false,
+            });
+          })
+          .done();
+        }
+      });
+    } catch (err) {
+      // 
+    }
   }
 
   render() {
@@ -94,8 +110,16 @@ class HotDeals extends Component {
             <Text>
                 Loading
             </Text>
+             <TouchableHighlight style={{padding: 12,}} 
+                onPress={() => this.populateData()} underlayColor="white">
+              <Icon name="ios-remove-circle-outline" size={50} color="#616161" />
+             </TouchableHighlight>
         </View>
       )
+    }
+
+    populateData() {
+      this.fetchData();
     }
 }
 
@@ -113,19 +137,14 @@ class DishItem extends Component {
     return ( 
           <View>
             <Card>
-                  <Card.Media
-                      image={<Image source={{ uri: entity.dish_image}} />}
-                      />
-                  <Card.Body style={{height : 10}}>
-                        <Text style={{fontWeight: 'bold', fontSize: 18}}>{entity.dish_name}</Text>
+                  <Card.Body style={{height : 12}}>
+                        <Text style={{fontWeight: '300', fontSize: 24}}>{entity.dish_name}</Text>
                   </Card.Body>
-                  <Divider inset/>
                   <Card.Actions style={{height : 15}}>
                       <View style={{flex: 1, flexDirection: 'row'}}>
                             <View style={{flex:1, justifyContent: 'center', alignItems: 'flex-start'}}>
                                <Text style={styles.dish_price}>${entity.dish_price}</Text>
                             </View>
-
                             <View style={{flex:1, justifyContent: 'flex-end', alignItems: 'center', 
                             flexDirection:'row'}}>
                                 <TouchableHighlight style={{padding: 12,}} 
@@ -148,7 +167,7 @@ class DishItem extends Component {
    this.setState({
       quantity : this.state.quantity + 1,
    })
-   this.props.addToCart(entity);
+   // this.props.addToCart(entity);
   }
 
   removeDish(entity) {
@@ -178,9 +197,9 @@ const styles = StyleSheet.create({
        backgroundColor: '#212121'
    },
    listView: {
-       paddingTop: 5,
+       paddingTop: 1,
        backgroundColor: '#F2F1F0',
-       paddingBottom: 5
+       paddingBottom: 1
    },
    loading: {
        flex: 1,
@@ -190,7 +209,7 @@ const styles = StyleSheet.create({
    },
    dish_price:{
        left: 16,
-       fontSize: 16
+       fontSize: 18
    },
 
    ripple: {

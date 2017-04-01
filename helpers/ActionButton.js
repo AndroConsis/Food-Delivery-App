@@ -74,6 +74,7 @@ export default class ActionButton extends Component {
           backgroundColor: this.props.bgColor,
           opacity: this.anim
         }]}>
+          <Text>NEED TO WORK HERE</Text>
           {this.props.backdrop}
         </Animated.View>
         <View pointerEvents="box-none" style={this.getContainerStyles()}>
@@ -134,6 +135,7 @@ export default class ActionButton extends Component {
             style={animatedViewStyle}>
             {this._renderButtonIcon()}
           </Animated.View>
+
         </TouchableOpacity>
       </View>
     );
@@ -195,7 +197,6 @@ export default class ActionButton extends Component {
 
   animateButton() {
     if (this.state.active) return this.reset();
-
     Animated.spring(this.anim, { toValue: 1 }).start();
 
     this.setState({ active: true });
