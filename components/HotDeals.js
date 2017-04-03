@@ -29,6 +29,11 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import GiftedSpinner from 'react-native-gifted-spinner';
 
 var REQUEST_URL = 'http://www.mocky.io/v2/57a30ea93b0000b10f903406';
+
+import { EventEmitter } from 'fbemitter';
+
+let _emitter = new EventEmitter();
+
 var _addToCart;
 
 class HotDeals extends Component {
@@ -108,10 +113,7 @@ class HotDeals extends Component {
     renderLoadingView() {
       return (
       <View style={styles.loading}>
-      <GiftedSpinner />
-            <Text>
-                Loading
-            </Text>
+      <GiftedSpinner size={"large"} color="#9E9E9E"/>
         </View>
       )
     }
@@ -145,7 +147,7 @@ class DishItem extends Component {
               </View>
               <View style={styles.item_middle_info}>
                 <Text style={styles.dish_name}>{entity.dish_name}</Text>          
-                <Text style={styles.dish_price}><Text style={styles.currency}>₹</Text>{entity.dish_price}</Text>
+                <Text style={styles.dish_price} allowFontScaling={true} ><Text style={styles.currency}>₹ </Text>{entity.dish_price}</Text>
               </View>
               <View style={styles.item_bottom_info}>
                 <View style={styles.details_container}>
@@ -161,11 +163,11 @@ class DishItem extends Component {
                   {this.state.quantity > 0 && 
                       <TouchableHighlight style={{paddingLeft: 8}} 
                             onPress={() => this.removeDish(entity)} underlayColor="white">
-                        <Icon name="ios-remove-circle-outline" size={45} color="#26a69a" />
+                        <Icon name="ios-remove-circle-outline" style={styles.button_icon} color="#26a69a" />
                         </TouchableHighlight>
                       }
                       <TouchableHighlight style={{paddingLeft: 12}} onPress={() => this.addDish(entity)} underlayColor="white">
-                      <Icon name="ios-add-circle-outline" size={45} color="#26a69a" />
+                      <Icon name="ios-add-circle-outline" style={styles.button_icon} color="#26a69a" />
                       </TouchableHighlight>
                   </View>
                 </View>
@@ -178,6 +180,7 @@ class DishItem extends Component {
    this.setState({
       quantity : this.state.quantity + 1,
    })
+   _emitter.emit('updateBagde');
    // this.props.addToCart(entity);
   }
 

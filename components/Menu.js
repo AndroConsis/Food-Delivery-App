@@ -92,10 +92,12 @@ class Menu extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<ListView
-					dataSource={this.state.dataSource}
-					renderRow={ (item) => this._renderMenuItem(item) }
-				></ListView>
+				<View style={styles.header_container}>
+					<ListView
+						dataSource={this.state.dataSource}
+						renderRow={ (item) => this._renderMenuItem(item) }
+					></ListView>
+				</View>
 				<View style={styles.footer_container}>
 					<TouchableOpacity style={styles.button}>
 					<View style={styles.item_container}>
